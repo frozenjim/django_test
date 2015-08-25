@@ -20,6 +20,7 @@ from article.views import HelloTemplate
 
 
 urlpatterns = [
+    url(r'^$', 'django_test.views.home', name='home'),
     url(r'^hello/$', 'article.views.hello', name='fake_hello'),
     url(r'^hello_template/$', 'article.views.hello_template', name='hello_template'),
     url(r'^hello_template_simple/$', 'article.views.hello_template_simple', name='hello_template_simple' ),
