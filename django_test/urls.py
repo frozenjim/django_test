@@ -16,8 +16,14 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from article.views import HelloTemplate
+
+
 urlpatterns = [
     url(r'^hello/$', 'article.views.hello', name='fake_hello'),
+    url(r'^hello_template/$', 'article.views.hello_template', name='hello_template'),
+    url(r'^hello_template_simple/$', 'article.views.hello_template_simple', name='hello_template_simple' ),
+    url(r'^hello_class_view/$', HelloTemplate.as_view(), name='hello_class_view'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^article/', include('article.urls', namespace='article')),
     # url(r'', include('play.urls', namespace='default')),
