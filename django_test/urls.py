@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^hello_template_simple/$', 'article.views.hello_template_simple', name='hello_template_simple' ),
     url(r'^hello_class_view/$', HelloTemplate.as_view(), name='hello_class_view'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^article/', include('article.urls', namespace='article')),
+    url(r'^articles/', include('article.urls', namespace='articles')),
     # url(r'', include('play.urls', namespace='default')),
     # url(r'^play/', include('play.urls', namespace='play')),
     # url(r'^userprofile/', include('userprofile.urls', namespace='userprofile')),
