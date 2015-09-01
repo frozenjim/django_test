@@ -58,8 +58,7 @@ ROOT_URLCONF = 'django_test.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,4 +102,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+
+# In base.html I have had to change his static calls from:
+#   {% static "assets/css/default.css" %}
+#   to
+#   {% static "css/default.css" %}
+
+
+# (1.) You put files in 'static'
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# (2.) COLLECTSTATIC copies your files from all STATICFILES_DIRS to STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets',)
+
+# location of these copied files is referred to by this URL
+# in production, it might be "http://somesite.com/static"
 STATIC_URL = '/static/'
+
+

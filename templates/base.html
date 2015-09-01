@@ -1,36 +1,14 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}My Base Template{% endblock %}</title>
-
-    <style type="text/css">
-        body {
-            text-align: center;
-        }
-
-        #page {
-            width: 960px;
-            text-align: left;
-            margin: 10px auto 20px auto;
-            background-color: #8c8c8c;
-        }
-
-        #sidebar {
-            float: left;
-            width: 200px;
-            border: 1px solid #000;
-        }
-
-        #content {
-            float: left;
-            width: 600px;
-            border: 1px solid #f00;
-            padding: 10px;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="{% static "css/default.css" %}" />
 </head>
+
+
 <body>
 
     <div id="page">
@@ -47,6 +25,7 @@
             {% block content %}
             This is the Content area.
             {% endblock %}
+            <img src="{% static "images/python-logo.jpg" %}" width="200"/>
         </div>
     </div>
 
