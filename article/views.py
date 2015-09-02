@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template.loader import get_template
 from django.views.generic import TemplateView
 
@@ -7,16 +7,39 @@ from article.models import Article
 
 
 def articles(request):
-    return render_to_response(
+    """
+    I updated render_to_request to "render" because
+    render_to_request will be deprecated in v2.0
+    according to the devs.
+    """
+
+    language = 'en-us'
+    session_language = 'en-us'
+
+    if 'lang' in request.COOKIES:
+        language = request.COOKIES['lang']
+
+    return render(
+        request,
         'articles.html',
-        {'articles': Article.objects.all()})
+        {'articles': Article.objects.all(),
+            'language': language}
+    )
 
 
 def article(request, article_id=1):
-    return render_to_response(
+    return render(
+        request,
         'article.html',
         {'article': Article.objects.get(id=article_id)}
     )
+
+
+def language(request, language='en-us'):
+    response = HttpResponse("setting language to %s" % language)
+
+    response.set_cookie('lang', language)
+    return response
 
 
 def hello(request):
