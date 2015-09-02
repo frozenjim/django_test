@@ -29,6 +29,9 @@ urlpatterns = [
     url(r'^accounts/loggedin/$', 'django_test.views.loggedin'),
     url(r'^accounts/invalid/$', 'django_test.views.invalid_login'),
 
+    url(r'^accounts/register/$', 'django_test.views.register_user'),
+    url(r'^accounts/register_success/$', 'django_test.views.register_success'),
+
     # From previous tutorials
     url(r'^$', 'django_test.views.home', name='home'),
     url(r'^hello/$', 'article.views.hello', name='fake_hello'),
