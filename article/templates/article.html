@@ -10,7 +10,7 @@
     <h1>{{ article.title }}</h1>
 
     {% if article.thumbnail %}
-        <p><img src="/assets/uploaded_files/{{ article.thumbnail }}" width="200"/></p>
+        <p><img src="/static/{{ article.thumbnail }}" width="200"/></p>
     {% endif %}
 
     <p>{{ article.body }}</p>
