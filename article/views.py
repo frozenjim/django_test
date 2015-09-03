@@ -1,9 +1,14 @@
-from django.http import HttpResponse
+# django.CORE.context_processors is deprecated.
+# use django.TEMPLATE.context_processors instead
+from django.template.context_processors import csrf
+
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template.loader import get_template
 from django.views.generic import TemplateView
 
 from article.models import Article
+from .forms import ArticleForm
 
 
 def articles(request):
@@ -47,6 +52,29 @@ def language(request, language='en-us'):
 
     request.session['lang'] = language
     return response
+
+
+def create(request):
+    if request.POST:
+        form = ArticleForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return HttpResponseRedirect('/articles/all')
+    else:
+        form = ArticleForm()
+
+    args = {}
+    args.update(csrf(request))
+
+    args['form'] = form
+
+    return render(
+        request,
+        'create_article.html',
+        args
+    )
+
 
 
 def hello(request):
