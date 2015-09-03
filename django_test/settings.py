@@ -119,6 +119,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets',)
 # in production, it might be "http://somesite.com/static"
 STATIC_URL = '/static/'
 
+# Todo: Investigate if this is the right place for MEDIA_ROOT
+#   Need to change this from 'static' if we don't want every
+#   uploaded image being copied to /assets each time we do a
+#   collectstatic.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 
 

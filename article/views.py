@@ -27,14 +27,13 @@ def articles(request):
     if 'lang' in request.session:
         session_language = request.session['lang']
 
-    return render(
-        request,
-        'articles.html',
-        {'articles': Article.objects.all(),
-            'language': language,
-            'session_language': session_language,
-         }
-    )
+    args = {}
+    args.update(csrf(request))
+    args['articles'] = Article.objects.all()
+    args['language'] = language
+    args['session_language'] = session_language
+
+    return render(request, 'articles.html', args)
 
 
 def article(request, article_id=1):
@@ -113,3 +112,15 @@ class HelloTemplate(TemplateView):
         context = super(HelloTemplate, self).get_context_data(**kwargs)
         context['name'] = 'James'
         return context
+
+
+def search_titles(request):
+    if request.method == 'POST':
+        search_text = request.POST['search_text']
+    else:
+        search_text = ''
+
+    articles = Article.objects.filter(title__contains=search_text)
+
+    return render(request, 'ajax_search.html', {'articles': articles})
+
