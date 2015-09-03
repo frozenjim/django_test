@@ -119,4 +119,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets',)
 # in production, it might be "http://somesite.com/static"
 STATIC_URL = '/static/'
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
+
 
