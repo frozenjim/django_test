@@ -3,7 +3,7 @@
 from django.template.context_processors import csrf
 
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 from django.template.loader import get_template
 from django.views.generic import TemplateView
 
@@ -76,6 +76,16 @@ def create(request):
     )
 
 
+def like_article(request, article_id):
+    if article_id:
+        a = Article.objects.get(id=article_id)
+        count = a.likes
+        count += 1
+        a.likes = count
+        a.save()
+
+    return HttpResponseRedirect('/articles/get/%s' % article_id)
+
 
 def hello(request):
     name = "James"
@@ -92,7 +102,7 @@ def hello_template(request):
 
 def hello_template_simple(request):
     name = "James"
-    return render_to_response('hello.html', {'name': name})
+    return render(request, 'hello.html', {'name': name})
 
 
 class HelloTemplate(TemplateView):
